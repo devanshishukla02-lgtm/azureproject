@@ -280,7 +280,10 @@
 												"type": "DatasetReference",
 												"parameters": {
 													"container": "bronze-project2",
-													"folder": "cdc",
+													"folder": {
+														"value": "@{item().table}_cdc",
+														"type": "Expression"
+													},
 													"file": "empty.json"
 												}
 											}
