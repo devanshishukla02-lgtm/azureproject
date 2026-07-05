@@ -80,7 +80,7 @@
 									"parameters": {
 										"container": "bronze-project2",
 										"folder": {
-											"value": "item().table",
+											"value": "@{item().table}",
 											"type": "Expression"
 										},
 										"file": {
