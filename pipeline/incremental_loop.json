@@ -42,7 +42,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "select * from @{item().schema}.@{item().table} where @{item().cdc_col} > \n    '@{if(empty(item().from_date),activity('last_cdc').output.value[0].cdc,item().from_date)}'",
+										"value": "select * from @{item().schema}.@{item().table} where @{item().cdc_col} >=\n    '@{if(empty(item().from_date),activity('last_cdc').output.value[0].cdc,item().from_date)}'",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
@@ -80,7 +80,7 @@
 									"parameters": {
 										"container": "bronze-project2",
 										"folder": {
-											"value": "item().table",
+											"value": "@{item().table}",
 											"type": "Expression"
 										},
 										"file": {
@@ -321,6 +321,8 @@
 			{
 				"name": "alert",
 				"type": "WebActivity",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "ForEach1",
